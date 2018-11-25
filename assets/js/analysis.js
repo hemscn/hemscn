@@ -19,10 +19,18 @@ setTimeout(function() {
 					return;
 				} else {
 					url = obj.url;
+					document.getElementById("url").value = obj.url;
 				}
 			} else {
 				url = document.getElementById("url").value;
 			}
+			getUrlTitle({
+				url: url,
+				callback:function(obj){
+					document.title=obj+" 女娲帮解析 有您更精彩!";
+					$(".title-text").text(obj);
+				}
+			});
 
 			document.getElementById("videoView").src = jiekou + url;
 		}
@@ -37,12 +45,29 @@ setTimeout(function() {
 			}
 			jiexi();
 		});
-
 		function init() {
 			var url = $.getUrlParam('url');
 			jiexi({
 				url: url
 			});
+		}
+		function getUrlTitle(obj) {
+			if (obj != null || obj.url != null) {
+				$.ajax({
+					url: "http://guide.nvwas.com/sigu/data/title.php",
+					type: "POST",
+					data: {
+						titurl: obj.url
+					},
+					headers : {'contentType':'application/x-www-form-urlencoded'},
+					success: function(data) {
+						if(obj.callback!=null){
+							obj.callback(data);
+						}
+					}
+				});
+			}
+			return "";
 		}
 		init();
 	});
