@@ -1,0 +1,15 @@
+<!DOCTYPE html><html>	<head>		<meta charset="UTF-8">		<title>Nvwas 有你更精彩！</title>		<style>			html,			body {				width: 100%;				height: 100%;				font-family: "微软雅黑";				overflow: hidden;			}						* {				padding: 0px;				margin: 0px;			}						iframe {				width: 100%;				height: 100%;				position: absolute;			}						#myiframe1 {				z-index: 3;			}						#myiframe2 {				z-index: 2;			}						#myiframe3 {				z-index: 1;			}						span {				width: 35px;				height: 35px;				padding: 5px;				font-size: 14px;				font-weight: bold;				color: #ffffff;				background-color: #34bdf0;				margin: 3px;				cursor: pointer;			}						#myspan1 {				background-color: #1c76c3;			}		</style>		<script language="javascript">			function iframeshow(str) {				if(str == "myspan1") {					document.getElementById('myiframe1').style.zIndex = 3;//					document.getElementById('myiframe2').style.zIndex = 2;					document.getElementById('myiframe3').style.zIndex = 1;					document.getElementById('myspan1').style.backgroundColor = "#1c76c3";//					document.getElementById('myspan2').style.backgroundColor = "#34bdf0";					document.getElementById('myspan3').style.backgroundColor = "#34bdf0";				}//				if(str == "myspan2") {
+//
+//					document.getElementById('myspan1').style.backgroundColor = "#34bdf0";
+//
+//					document.getElementById('myspan2').style.backgroundColor = "#1c76c3";
+//
+//					document.getElementById('myspan3').style.backgroundColor = "#34bdf0";
+//
+//					document.getElementById('myiframe1').style.zIndex = 1;
+//
+//					document.getElementById('myiframe2').style.zIndex = 3;
+//
+//					document.getElementById('myiframe3').style.zIndex = 2;
+//
+//				}				if(str == "myspan3") {					document.getElementById('myspan1').style.backgroundColor = "#34bdf0";//					document.getElementById('myspan2').style.backgroundColor = "#34bdf0";					document.getElementById('myspan3').style.backgroundColor = "#1c76c3";					document.getElementById('myiframe1').style.zIndex = 1;//					document.getElementById('myiframe2').style.zIndex = 2;					document.getElementById('myiframe3').style.zIndex = 3;				}			}		</script>	</head>	<body>		<div style="text-align:center;line-height:40px;position: fixed;width:100px;height:40px;top:0px;right:18px;z-index: 2147483647;"><span onclick="iframeshow('myspan1');" id="myspan1">本</span><span id="myspan3" onclick="iframeshow('myspan3');">博</span></div>		<iframe id="myiframe1" frameborder="no" border="0" src="./index2.html"></iframe>		<iframe id="myiframe3" frameborder="no" border="0" src="https://blog.nvwas.com"></iframe>	</body></html>
