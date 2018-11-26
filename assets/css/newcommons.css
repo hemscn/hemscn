@@ -149,17 +149,7 @@ body {
 	cursor: pointer
 }
 
-.logos_lists .wait,
-.logos_lists dl dd,
-.logos_lists h4 {
-	font-size: 14px;
-	font-family: "Microsoft Yahei";
-}
 
-.tips {
-	padding: 20px 10px;
-	font-family: "Microsoft Yahei";
-}
 
 a img,
 img {
@@ -167,12 +157,7 @@ img {
 	border: 0
 }
 
-.logos_lists h4 {
-	padding: 10px 0;
-	text-align: left;
-	color: #666;
-	font-weight: 400
-}
+
 
 .logos_lists dl {
 	float: left;
@@ -235,7 +220,9 @@ img {
 	font: 400 16px/59px "microsoft yahei"
 }
 
-
+.jiexi-logo{
+	vertical-align: middle;
+}
 
 .navigation-up .navigation-v3 li h1 {
 	display: inline-block;
