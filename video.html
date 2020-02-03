@@ -19,7 +19,7 @@
 			<div class="navigation-v3">
 				<ul>
 					<li>
-							<img data-v-dfd2879e="" src="assets/images/jiexi-logo.svg"  class="jiexi-logo">
+						<img data-v-dfd2879e="" src="assets/images/jiexi-logo.svg" class="jiexi-logo">
 					</li>
 					<li class="nav-up-selected-inpage">
 						<h2>
@@ -35,8 +35,8 @@
 				<span>正在播放:</span><span class="title-text">女娲帮有您更精彩!</span>
 			</div>
 			<div class="main-video">
-				<iframe id="videoView" name="videoView" src="./ty.html" frameborder="no" border="0"
-				 marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" allowfullscreen="true"></iframe>
+				<iframe id="videoView" name="videoView" src="./ty.html" frameborder="no" border="0" marginwidth="0" marginheight="0"
+				 scrolling="no" allowtransparency="yes" allowfullscreen="true"></iframe>
 			</div>
 
 			<div class="url-title">
@@ -44,16 +44,10 @@
 				<div class="url-input">
 					<select style="border:0px;font-size:18px" id="jiekou">
 						<option value="http://api.bbbbbb.me/jx/?url=">思古解析</option>
-						<option value="http://api.wlzhan.com/sudu/?url=">万能接口1</option>
-						<option value="http://jiexi.071811.cc/jx2.php?url=">万能接口3</option>
+						<option value="http://jiexi.071811.cc/jx2.php?url=">石头云解析</option>
 						<option value="http://jqaaa.com/jq3/?url=&amp;url=">万能接口4</option>
-						<option value="http://yun.baiyug.cn/vip/index.php?url=">万能接口5</option>
-						<option value="https://jiexi.071811.cc/jx2.php?url=">万能接口6</option>
-						<option value="http://api.baiyug.cn/vip/index.php?url=">爱奇艺超清接口2</option>
-						<option value="https://api.flvsp.com/?url=">爱奇艺超清接口3</option>
 						<option value="http://www.82190555.com/index/qqvod.php?url=">优酷超清接口</option>
 						<option value="http://vip.jlsprh.com/index.php?url=">搜狐视频接口</option>
-						<option value="http://2gty.com/apiurl/yun.php?url=">乐视视频接口</option>
 					</select>
 					<div class="searchs">
 						<div class="from">
@@ -181,3 +175,59 @@
 		</div>
 	</body>
 </html>
+<script>
+	htl.use(function() {
+		var $ = htl.$;
+
+		function getUrlTitle(obj) {
+			if (obj != null || obj.url != null) {
+				$.ajax({
+					url: "http://guide.nvwas.com/sigu/data/title.php",
+					type: "POST",
+					data: {
+						titurl: obj.url
+					},
+					headers: {
+						'contentType': 'application/x-www-form-urlencoded'
+					},
+					success: function(data) {
+						if (obj.callback != null) {
+							obj.callback(data);
+						}
+					}
+				});
+
+			}
+			return "";
+		}
+
+		function jiexi(obj) {
+			var jiekou = $("#jiekou").val();
+			var url = obj != null && obj.url != null ? obj.url : $("#url").val();
+			$("#url").val(url);
+			getUrlTitle({
+				url: url,
+				callback: function(obj) {
+					document.title = obj + " 女娲帮解析 有您更精彩!";
+					$(".title-text").text(obj);
+				}
+			});
+
+			$("#videoView").attr("src", jiekou + url);
+		}
+		$("#doplayers").click(function() {
+			jiexi();
+		});
+		$("#jiekou").on("change", function xuanzejiekou(v) {
+			var url = document.getElementById("url").value;
+			if (url == "") {
+				alert('请输入视频网站网址！');
+				return "";
+			}
+			jiexi();
+		});
+		jiexi({
+			url: htl.getUrlParam("url")
+		});
+	});
+</script>
