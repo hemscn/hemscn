@@ -10,7 +10,7 @@
 	var doc = document,
 		modules = [{
 			name: "jquery",
-			url: '//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+			url: '//cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js',
 			callback: function() {
 				htl.jquery = htl.$ = jQuery;
 			}
