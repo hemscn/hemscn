@@ -7,8 +7,8 @@ body {
 
 @media screen  and (min-width: 1551px) {
 	:root {
-		--container-width: 1500px;
-		--video-iframe-height: 673px;
+		--container-width: 1400px;
+		--video-iframe-height: 630px;
 	}
 }
 
@@ -268,7 +268,7 @@ img {
 
 .main-center {
 	background-color: #292929;
-	padding: 10px;
+	padding: 0px;
 }
 
 .main-video {
@@ -284,7 +284,7 @@ img {
 .main-video-title {
 	border-radius: 5px 5px 0 0;
 	width: var(--container-width);
-	margin: 10px auto 0px auto;
+	margin: 0px auto;
 	text-align: left;
 	background: rgba(0, 0, 0, .49);
 }

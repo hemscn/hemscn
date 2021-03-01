@@ -42,41 +42,32 @@
 			<div class="url-title">
 				<div class="url-title-tips">复制VIP视频的地址到↓↓↓↓↓栏中点击立即播放就行了！如果不能播放请在选择接口处更改接口!</div>
 				<div class="url-input">
-					<select style="border:0px;font-size:18px" id="jiekou">
-					
-						
+					<select style="border:0px;font-size:18px" name="jiexiServer" id="jiexiServer">
+						<option value="http://api.bbbbbb.me/jx/?url=">思古解析</option>
 						<option value="https://www.8090g.cn/?url=">8090g</option>
-					  <option value="https://jiexi.071811.cc/jx.php?url=">石头解析</option>
-					  <option value="http://jx.598110.com/?url=">一号</option>
-					  <option value="http://vip.jlsprh.com/?url=">二号</option>
-					  <option value="http://jx.618ge.com/?url=">三号</option>
-					  <option value="http://jx.drgxj.com/?url=">四号</option>
-					  <option value="http://jx.du2.cc/?url=">五号</option>
-					  <option value="https://vip.mpos.ren/v/?url=">人人解析</option>
-					  <option value="http://jx.618g.com/?url=">618G</option>
-					  <option value="http://jx.cesms.cn/?url=">大亨影院解析</option>
-					  <option value="https://660e.com/?url=">乐乐云</option>
-					  <option value="https://www.administratorw.com/admin.php?url=">无名小站</option>
-					  <option value="https://www.administratorw.com/video.php?url=">无名小站2</option>
-					  <option value="http://api.baiyug.vip/index.php?url=">百域阁</option>
-					  <option value="http://www.1717yun.com/jx/vip/index.php?url=">1717云</option>
-					  <option value="http://j.zz22x.com/jx/?url=">花园解析</option>
-					  <option value="https://vip.bljiex.com/?v=">BL解析</option>
-					  <option value="https://17kyun.com/api.php?url=">易看</option>
-					  <option value="https://z1.m1907.cn/?a=1&jx=">m1907</option>
-					  <option value="https://api.123zx.net/m3u8/play.html?id=">33UU</option>
-					  <option value="https://2.08bk.com/?url=">小七</option>
-					  <option value="http://api.bbbbbb.me/jx/?url=">思古解析</option>
-					  <option value="http://jiexi.071811.cc/jx2.php?url=">石头云解析</option>
-					  <option value="http://jqaaa.com/jq3/?url=&amp;url=">万能接口4</option>
-					  <option value="http://www.82190555.com/index/qqvod.php?url=">优酷超清接口</option>
-					  <option value="http://vip.jlsprh.com/index.php?url=">搜狐视频接口</option>
+						<option value="https://z1.m1907.cn/?a=1&jx=">m1907电视联播</option>
+						<option value="http://jx.598110.com/?url=">一号</option>
+						<option value="http://vip.jlsprh.com/?url=">二号</option>
+						<option value="http://jx.drgxj.com/?url=">四号</option>
+						<option value="https://vip.mpos.ren/v/?url=">人人解析</option>
+						<option value="http://jx.618g.com/?url=">618G</option>
+						<option value="http://jx.cesms.cn/?url=">大亨影院解析</option>
+						<option value="https://660e.com/?url=">乐乐云</option>
+						<option value="https://www.administratorw.com/video.php?url=">无名小站</option>
+						<option value="http://api.baiyug.vip/index.php?url=">百域阁</option>
+						<option value="http://www.1717yun.com/jx/vip/index.php?url=">1717云</option>
+						<option value="http://j.zz22x.com/jx/?url=">花园解析</option>
+						<option value="https://vip.bljiex.com/?v=">BL解析</option>
+						<option value="https://17kyun.com/api.php?url=">17Kyun</option>
+						<option value="https://2.08bk.com/?url=">小七全网</option>
+						<option value="http://jqaaa.com/jq3/?url=&amp;url=">万能接口4</option>
+						<option value="http://vip.jlsprh.com/index.php?url=">搜狐视频接口</option>
 					</select>
 					<div class="searchs">
 						<div class="from">
-							<input name="url" id="url" type="text" class="text" placeholder="视频地址">
+							<input name="jiexiUrl" id="jiexiUrl" type="text" class="text" placeholder="视频地址">
 
-							<input name="doplayers" type="button" id="doplayers" class="button" value="立即播放">
+							<input name="gotoJiexi" type="button" id="gotoJiexi" class="button" value="立即播放">
 						</div>
 					</div>
 				</div>
@@ -201,7 +192,6 @@
 <script>
 	htl.use(function() {
 		var $ = htl.$;
-
 		function getUrlTitle(obj) {
 			if (obj != null || obj.url != null) {
 				$.ajax({
@@ -219,48 +209,58 @@
 						}
 					}
 				});
-
 			}
 			return "";
 		}
-
+		/**
+		 * @param {jiexiUrl:被解析视频地址,init:是否初始化默认值true,server:解析服务地址} obj 
+		 */
 		function jiexi(obj) {
-			var jiekou=null;
-			try{
-				localStorage.getItem("jiekou");
-			}catch(e){
+			var jiexiServer = null;
+			if (obj.init) {
+				try {
+					jiexiServer = localStorage.getItem("jiexiServer");
+				} catch (e) {}
+				if (jiexiServer == null) {
+					jiexiServer = obj.jiexiServer;
+					localStorage.setItem("jiexiServer", jiexiServer);
+				} else {
+					$('#jiexiServer option[value="' + jiexiServer + '"]').attr("selected", "selected");
+				}
+			} else {
+				jiexiServer=obj.jiexiServer;
+              localStorage.setItem("jiexiServer", obj.jiexiServer);
 			}
-			if(jiekou==null){
-				jiekou = $("#jiekou").val();
-				localStorage.setItem("jiekou",jiekou);
-			}else{
-				$("#jiekou option[value="+jiekou+"]").attr("selected", "selected");
-			}
-			var url = obj != null && obj.url != null ? obj.url : $("#url").val();
-			$("#url").val(url);
+			
 			getUrlTitle({
-				url: url,
+				url: obj.jiexiUrl,
 				callback: function(obj) {
 					document.title = obj + " 女娲帮解析 有您更精彩!";
 					$(".title-text").text(obj);
 				}
 			});
-
-			$("#videoView").attr("src", jiekou + url);
+			$("#videoView").attr("src", jiexiServer + obj.jiexiUrl);
 		}
-		$("#doplayers").click(function() {
-			jiexi();
-		});
-		$("#jiekou").on("change", function xuanzejiekou(v) {
-			var url = document.getElementById("url").value;
+		$("#gotoJiexi").click(function() {
+			var url = $("#jiexiUrl").val();
 			if (url == "") {
 				alert('请输入视频网站网址！');
 				return "";
 			}
-			jiexi();
+			jiexi({init:false,jiexiServer:$("#jiexiServer").val(),jiexiUrl:url});
 		});
-		jiexi({
-			url: htl.getUrlParam("url")
+		$("#jiexiServer").on("change", function(v) {
+			$("#gotoJiexi").click();
 		});
+		function init() {
+			var url = htl.getUrlParam("url");
+			if (url != null) {
+				$("#jiexiUrl").val(url);
+			}
+			if(url!=null){
+			jiexi({init:true,jiexiServer:$("#jiexiServer").val(),jiexiUrl:url});
+			}
+		}
+		init();
 	});
 </script>
