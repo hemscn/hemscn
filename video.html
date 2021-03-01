@@ -225,7 +225,17 @@
 		}
 
 		function jiexi(obj) {
-			var jiekou = $("#jiekou").val();
+			var jiekou=null;
+			try{
+				localStorage.getItem("jiekou");
+			}catch(e){
+			}
+			if(jiekou==null){
+				jiekou = $("#jiekou").val();
+				localStorage.setItem("jiekou",jiekou);
+			}else{
+				$("#jiekou option[value="+jiekou+"]").attr("selected", "selected");
+			}
 			var url = obj != null && obj.url != null ? obj.url : $("#url").val();
 			$("#url").val(url);
 			getUrlTitle({
